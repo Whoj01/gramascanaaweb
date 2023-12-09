@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:18.18.0
+FROM --platform=linux/amd64 node:18.18-alpine
 
 WORKDIR /gram-web
 
