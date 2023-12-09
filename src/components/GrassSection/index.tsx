@@ -384,7 +384,7 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
-              src="/bermuda.webp"
+              src="/bermudas.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
               style={{
