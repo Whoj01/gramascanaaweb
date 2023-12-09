@@ -1,8 +1,21 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Nunito_Sans as Nunito, Poppins } from 'next/font/google'
 import './globals.css'
+import StyledComponentsRegistry from '@/lib/registry'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { ToTop } from '@/components/toTop'
+import { WhatsIcon } from '@/components/WhatsIcon'
 
-const inter = Inter({ subsets: ['latin'] })
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['400', '500', '300', '700'],
+})
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['700', '500'],
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +28,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR">
+      <body className={`${nunito.className} ${poppins.className}`}>
+        <StyledComponentsRegistry>
+          <Header />
+
+          {children}
+
+          <Footer />
+
+          <ToTop />
+
+          <WhatsIcon />
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
