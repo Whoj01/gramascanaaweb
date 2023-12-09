@@ -10,5 +10,6 @@ export default function MoreAboutGrass({
 
   const grass = grassInfo.find((grass) => grass.name.includes(formatedName))
 
-  return <GrassInfo grass={grass} />
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return <GrassInfo grass={grass!} />
 }

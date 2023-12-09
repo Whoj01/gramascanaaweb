@@ -15,8 +15,8 @@ import {
   GrassInfoContainer,
 } from '../GrassContainer/styles'
 import { CheckCircle } from 'lucide-react'
-import router from 'next/navigation'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 interface RecomendationsProps {
   grams: Array<{
@@ -34,6 +34,8 @@ interface RecomendationsProps {
 }
 
 export const Recomendations = ({ grams, slug }: RecomendationsProps) => {
+  const router = useRouter()
+
   return (
     <>
       <FirstSection
