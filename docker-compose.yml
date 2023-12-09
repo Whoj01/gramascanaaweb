@@ -16,8 +16,6 @@ services:
       LETSENCRYPT_EMAIL: eloirjunior1984@gmail.com
     networks:
       - internal-network
-    links:
-      - database
     restart: always
   jwildernginxproxy:
     image: jwilder/nginx-proxy
