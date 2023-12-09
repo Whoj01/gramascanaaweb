@@ -6,13 +6,9 @@ export default function MoreAboutGrass({
 }: {
   params: { slug: string }
 }) {
-  console.log(params.slug)
-
   const grams = grassInfo.filter((grass) =>
     grass.indicate.includes(params.slug),
   )
-
-  console.log(grams)
 
   return <Recomendations grams={grams} slug={params.slug} />
 }

@@ -4,16 +4,13 @@ import { useState, useEffect } from 'react'
 
 import * as S from './styles'
 import { ChevronUp } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
 export const ToTop = () => {
-  const router = useRouter()
-
   const [isScroll, setScroll] = useState<boolean>(false)
 
   const checkScroll = () => {
-    if (window.scrollY >= 300) setScroll((state) => true)
-    else setScroll((state) => false)
+    if (window.scrollY >= 300) setScroll(true)
+    else setScroll(false)
   }
 
   const scrollTo = () => {
@@ -26,8 +23,8 @@ export const ToTop = () => {
   useEffect(() => {
     window.addEventListener('scroll', checkScroll)
 
-    if (window.scrollY >= 300) setScroll((state) => true)
-    else setScroll((state) => false)
+    if (window.scrollY >= 300) setScroll(true)
+    else setScroll(false)
 
     return () => window.removeEventListener('scroll', checkScroll)
   }, [])

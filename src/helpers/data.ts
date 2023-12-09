@@ -1,15 +1,3 @@
-import { features } from 'process'
-
-// "/gramas/santo-agostinho"
-
-// "/gramas/zeon-
-
-// "/gramas/tifdwarf"
-
-// "/gramas/sao-
-// ('/gramas/batatais')
-// ('/gramas/bermudas')
-
 export const grassInfo = [
   {
     id: 1,

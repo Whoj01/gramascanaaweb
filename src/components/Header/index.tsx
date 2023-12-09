@@ -6,7 +6,7 @@ import { MenuLink } from '../MenuLink'
 import * as S from './styles'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export const Header = () => {
   const router = useRouter()
@@ -15,8 +15,8 @@ export const Header = () => {
   const [isScroll, setScroll] = useState<boolean>(false)
 
   const checkScroll = () => {
-    if (window.scrollY >= 110) setScroll((state) => true)
-    else setScroll((state) => false)
+    if (window.scrollY >= 110) setScroll(true)
+    else setScroll(false)
   }
 
   const sendMessage = () => {
@@ -35,8 +35,8 @@ export const Header = () => {
   useEffect(() => {
     window.addEventListener('scroll', checkScroll)
 
-    if (window.scrollY >= 110) setScroll((state) => true)
-    else setScroll((state) => false)
+    if (window.scrollY >= 110) setScroll(true)
+    else setScroll(false)
 
     return () => window.removeEventListener('scroll', checkScroll)
   }, [])

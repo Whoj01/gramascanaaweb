@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 
+// prettier-ignore
 export const NavMenuLink = styled(Link) <{ $isActive: boolean }>`
   position: relative;
 

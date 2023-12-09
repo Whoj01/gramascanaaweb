@@ -7,10 +7,9 @@ import {
   InfoContainerDivisor,
   InfoContainerText,
 } from '../GrassPage/GrassInfo/styles'
-import { GrassCardImage, GrassSectionContainer } from '../GrassSection/styles'
+import { GrassSectionContainer } from '../GrassSection/styles'
 
 import * as S from './styles'
-import { Lightbulb, Zap } from 'lucide-react'
 
 export const Transport = () => {
   return (

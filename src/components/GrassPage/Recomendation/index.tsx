@@ -34,8 +34,6 @@ interface RecomendationsProps {
 }
 
 export const Recomendations = ({ grams, slug }: RecomendationsProps) => {
-  console.log(grams)
-
   return (
     <>
       <FirstSection

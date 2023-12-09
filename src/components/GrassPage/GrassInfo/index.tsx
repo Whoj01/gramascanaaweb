@@ -38,10 +38,22 @@ interface GrassInfoProps {
   }
 }
 
+interface Grass {
+  id: number
+  name: string
+  pictures: string[]
+  banner: string
+  description: string
+  features: string[]
+  href: string
+  care: string[]
+  indicate: string[]
+}
+
 export const GrassInfo = ({ grass }: GrassInfoProps) => {
   const router = useRouter()
 
-  const [OtherGrass, setOtherGrass] = useState<any>([])
+  const [OtherGrass, setOtherGrass] = useState<Grass[]>([])
 
   const sendMessage = () => {
     const message = 'Olá, gostaria de fazer o orçamento da grama ' + grass.name
@@ -64,7 +76,7 @@ export const GrassInfo = ({ grass }: GrassInfoProps) => {
         )
         .filter((grassToCompare) => grassToCompare.id !== grass.id),
     )
-  }, [])
+  }, [grass.id, grass.indicate])
   return (
     <>
       <S.FirstSection
