@@ -18,7 +18,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Gramas canaã',
+  title: 'Gramas Canaã',
   description: 'As melhores gramas da região de itapetininga',
 }
 

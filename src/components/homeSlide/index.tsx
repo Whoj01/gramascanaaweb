@@ -17,6 +17,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
 import * as S from './style'
+import { sendMessage } from '@/helpers/sendMessage'
 
 export const HomeSlide = () => {
   return (
@@ -61,7 +62,7 @@ export const HomeSlide = () => {
               áreas. Transforme seu projeto e seu lazer com a Gramas Canaã.
             </S.SlideItemText>
 
-            <S.SlideButton>Fazer orçamento</S.SlideButton>
+            <S.SlideButton onClick={sendMessage}>Fazer orçamento</S.SlideButton>
           </S.SlideItemContainer>
         </SwiperSlide>
         <SwiperSlide
@@ -82,7 +83,7 @@ export const HomeSlide = () => {
               excelência em nossos serviços a mais de 20 anos.
             </S.SlideItemText>
 
-            <S.SlideButton>Fazer orçamento</S.SlideButton>
+            <S.SlideButton onClick={sendMessage}>Fazer orçamento</S.SlideButton>
           </S.SlideItemContainer>
         </SwiperSlide>
         <SwiperSlide
@@ -103,7 +104,7 @@ export const HomeSlide = () => {
               internacionalmente.
             </S.SlideItemText>
 
-            <S.SlideButton>Fazer orçamento</S.SlideButton>
+            <S.SlideButton onClick={sendMessage}>Fazer orçamento</S.SlideButton>
           </S.SlideItemContainer>
         </SwiperSlide>
 
@@ -125,7 +126,7 @@ export const HomeSlide = () => {
               nós e nossos clientes.
             </S.SlideItemText>
 
-            <S.SlideButton>Fazer orçamento</S.SlideButton>
+            <S.SlideButton onClick={sendMessage}>Fazer orçamento</S.SlideButton>
           </S.SlideItemContainer>
         </SwiperSlide>
       </Swiper>
