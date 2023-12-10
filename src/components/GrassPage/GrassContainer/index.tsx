@@ -6,6 +6,7 @@ import * as S from './styles'
 import { grassInfo } from '@/helpers/data'
 import { CheckCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { shimmer, toBase64 } from '@/helpers/ImageOp'
 
 export const GrassContainer = () => {
   const router = useRouter()
@@ -24,6 +25,9 @@ export const GrassContainer = () => {
                 height: '100%',
                 borderRadius: '12px',
               }}
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               width={500}
               height={300}
             />
