@@ -13,6 +13,7 @@ import {
 } from '../GrassPage/GrassContainer/styles'
 import { GrassSectionTitle } from '../GrassSection/styles'
 import { sendMessage } from '@/helpers/sendMessage'
+import { shimmer, toBase64 } from '@/helpers/ImageOp'
 
 export const Services = () => {
   return (
@@ -22,6 +23,9 @@ export const Services = () => {
       <GrassCard>
         <GrassCardImage>
           <Image
+            placeholder={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475),
+            )}`}
             src="/celebration-1.webp"
             alt="Foto da obra"
             sizes="100vw"
@@ -67,6 +71,9 @@ export const Services = () => {
       <GrassCard>
         <GrassCardImage>
           <Image
+            placeholder={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475),
+            )}`}
             src="/tifway-4.webp"
             alt="Foto da obra"
             sizes="100vw"
@@ -113,6 +120,9 @@ export const Services = () => {
       <GrassCard>
         <GrassCardImage>
           <Image
+            placeholder={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475),
+            )}`}
             src="/sao-carlos-3.webp"
             alt="Foto da obra"
             sizes="100vw"
@@ -161,13 +171,15 @@ export const Services = () => {
       <GrassCard>
         <GrassCardImage>
           <Image
+            placeholder={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475),
+            )}`}
             src="/esmeralda-2.webp"
             alt="Foto da obra"
             sizes="100vw"
             style={{
               width: '100%',
               height: '100%',
-
               borderRadius: '12px',
             }}
             width={500}

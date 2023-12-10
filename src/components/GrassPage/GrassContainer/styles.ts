@@ -90,7 +90,7 @@ export const GrassCard = styled.div`
 
   @media (min-width: 900px) {
     flex-direction: row;
-    max-width: 100%;
+    max-width: 162.8rem;
   }
 `
 
