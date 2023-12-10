@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import * as S from './styles'
 import { useRouter } from 'next/navigation'
+import { shimmer, toBase64 } from '@/helpers/ImageOp'
 
 export const GrassSection = () => {
   const router = useRouter()
@@ -19,6 +20,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/esmeralda.webp"
               alt="Grama esmeralda"
               sizes="100vw"
@@ -59,6 +63,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/SantoAgostinho.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -99,6 +106,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/tifway.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -139,6 +149,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/zeon.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -180,6 +193,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/Celebration.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -221,6 +237,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/tifdwarf.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -262,6 +281,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/coreana.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -303,6 +325,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/saocarlos.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -343,6 +368,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/batatais.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
@@ -384,6 +412,9 @@ export const GrassSection = () => {
         <S.GrassCard>
           <S.GrassCardImage>
             <Image
+              placeholder={`data:image/svg+xml;base64,${toBase64(
+                shimmer(700, 475),
+              )}`}
               src="/bermudas.webp"
               alt="Grama Santo Agostinho"
               sizes="100vw"
