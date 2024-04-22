@@ -1,7 +1,7 @@
 import * as S from './styles'
 import { Tractor, RollerCoaster, Flower2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { GiSoccerKick, GiParkBench } from 'react-icons/gi'
+import { GiParkBench } from 'react-icons/gi'
 
 export const WhereGrass = () => {
   const router = useRouter()
