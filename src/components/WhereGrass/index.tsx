@@ -38,18 +38,7 @@ export const WhereGrass = () => {
             Playgrounds
           </S.IconGrassText>
         </S.IconGrassBox>
-        <S.IconGrassBox>
-          <GiSoccerKick
-            onClick={() => router.push('/gramas/recomendacoes/campos')}
-            size={84}
-            color="rgba(9, 105, 6, 0.5)"
-          />
-          <S.IconGrassText
-            onClick={() => router.push('/gramas/recomendacoes/campos')}
-          >
-            Campos
-          </S.IconGrassText>
-        </S.IconGrassBox>
+
         <S.IconGrassBox>
           <GiParkBench
             onClick={() => router.push('/gramas/recomendacoes/pracas')}

@@ -144,7 +144,7 @@ export const WppButtons = styled.button`
 
   padding: 0 1rem;
 
-  border: none;
+  border: 1px solid #25d366;
   border-radius: 6px;
 
   outline: none;
