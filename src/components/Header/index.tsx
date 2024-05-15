@@ -7,6 +7,7 @@ import * as S from './styles'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { sendMessage } from '@/helpers/sendMessage'
 
 export const Header = () => {
   const router = useRouter()
@@ -17,15 +18,6 @@ export const Header = () => {
   const checkScroll = () => {
     if (window.scrollY >= 110) setScroll(true)
     else setScroll(false)
-  }
-
-  const sendMessage = () => {
-    const message = 'Olá, gostaria de fazer um orçamento com vocês!'
-
-    window.open(
-      `https://api.whatsapp.com/send?phone=5515996218062&text=${message}`,
-      '_blank',
-    )
   }
 
   const setCloseMenu = () => {
@@ -87,7 +79,7 @@ export const Header = () => {
 
         <S.WppButtons onClick={sendMessage}>
           <Phone size={24} color="#fff" />
-          (15) 9962-1806
+          (15) 99798-5721
         </S.WppButtons>
 
         <S.MenuIcon>
