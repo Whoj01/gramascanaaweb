@@ -9,7 +9,17 @@ import { NOME_EMPRESA, TELEFONE_WHATSAPP } from './contato'
  */
 
 // TODO: domínio real do site. Usado em canonical, sitemap, robots e og:url.
-export const SITE_URL = 'https://exemplo.com.br'
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://exemplo.com.br'
+
+/**
+ * Libera a indexação pelos buscadores.
+ *
+ * Fica desligado enquanto nome, telefone, CNPJ e domínio forem placeholder:
+ * deixar o Google indexar dados fictícios compromete o domínio real depois.
+ * Para ligar: NEXT_PUBLIC_INDEXAVEL=true no ambiente.
+ */
+export const INDEXAVEL = process.env.NEXT_PUBLIC_INDEXAVEL === 'true'
 
 /** Cidades de atuação: âncoras do SEO local, a peça que mais traz cliente. */
 export const CIDADES = ['Angatuba', 'Itapetininga', 'Sorocaba'] as const

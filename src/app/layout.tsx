@@ -5,6 +5,7 @@ import StyledComponentsRegistry from '@/lib/registry'
 import { NOME_EMPRESA } from '@/helpers/contato'
 import {
   DESCRICAO_PADRAO,
+  INDEXAVEL,
   OG_IMAGE,
   REGIAO_TEXTO,
   SITE_URL,
@@ -75,11 +76,11 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   robots: {
-    index: true,
-    follow: true,
+    index: INDEXAVEL,
+    follow: INDEXAVEL,
     googleBot: {
-      index: true,
-      follow: true,
+      index: INDEXAVEL,
+      follow: INDEXAVEL,
       'max-image-preview': 'large',
       'max-snippet': -1,
       'max-video-preview': -1,

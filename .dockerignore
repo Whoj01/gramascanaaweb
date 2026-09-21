@@ -1,0 +1,32 @@
+# Dependências e build: reconstruídos dentro da imagem
+node_modules
+.next
+out
+build
+
+# Git
+.git
+.gitignore
+
+# CREDENCIAIS — nunca devem entrar na imagem
+github
+github.pub
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+.env
+.env.*
+
+# Infra e docs
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+proxy.conf
+README.md
+
+# Editor / SO
+.vscode
+.idea
+.DS_Store
+npm-debug.log*

@@ -1,0 +1,31 @@
+# Deploy do site em servidor que JÁ roda um Traefik (projeto corretoras).
+#
+# Este arquivo NÃO sobe proxy próprio nem ocupa as portas 80/443: ele apenas
+# publica o site na porta 8080 e se registra na rede do Traefik existente.
+# Não usar o docker-compose.yml antigo aqui — ele sobe um nginx-proxy que
+# tomaria as portas 80/443 e derrubaria o site que já está no ar.
+
+services:
+  grama-web:
+    container_name: grama-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://187.127.2.118:8080}
+        NEXT_PUBLIC_INDEXAVEL: ${NEXT_PUBLIC_INDEXAVEL:-false}
+    environment:
+      TZ: America/Sao_Paulo
+      NODE_ENV: production
+    ports:
+      - "8080:3000"
+    networks:
+      - corretoras-proxy
+    restart: unless-stopped
+    labels:
+      # exposedbydefault=false no Traefik: sem esta linha ele ignora o container
+      traefik.enable: "false"
+
+networks:
+  corretoras-proxy:
+    external: true
