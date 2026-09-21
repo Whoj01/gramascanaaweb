@@ -1,70 +1,29 @@
+'use client'
+
 import * as S from './styles'
 import { Tractor, RollerCoaster, Flower2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { GiParkBench } from 'react-icons/gi'
 
-export const WhereGrass = () => {
-  const router = useRouter()
+const destinos = [
+  { slug: 'sitios', rotulo: 'Sítios', Icone: Tractor },
+  { slug: 'playgrounds', rotulo: 'Playgrounds', Icone: RollerCoaster },
+  { slug: 'pracas', rotulo: 'Praças', Icone: GiParkBench },
+  { slug: 'jardins', rotulo: 'Jardins', Icone: Flower2 },
+]
 
+export const WhereGrass = () => {
   return (
     <S.WhereGrassContainer>
-      <S.WhereGrassTitle>Onde você deseja colocar sua grama?</S.WhereGrassTitle>
+      <S.WhereGrassTitle>Onde você vai colocar sua grama?</S.WhereGrassTitle>
 
       <S.WhereGrassCards>
-        <S.IconGrassBox>
-          <Tractor
-            onClick={() => router.push('/gramas/recomendacoes/sitios')}
-            size={84}
-            color="#096906"
-            opacity={0.5}
-          />
-          <S.IconGrassText
-            onClick={() => router.push('/gramas/recomendacoes/sitios')}
-          >
-            Sítios
-          </S.IconGrassText>
-        </S.IconGrassBox>
+        {destinos.map(({ slug, rotulo, Icone }) => (
+          <S.IconGrassBox key={slug} href={`/gramas/recomendacoes/${slug}`}>
+            <Icone size={56} />
 
-        <S.IconGrassBox>
-          <RollerCoaster
-            onClick={() => router.push('/gramas/recomendacoes/playgrounds')}
-            size={84}
-            color="#096906"
-            opacity={0.5}
-          />
-          <S.IconGrassText
-            onClick={() => router.push('/gramas/recomendacoes/playgrounds')}
-          >
-            Playgrounds
-          </S.IconGrassText>
-        </S.IconGrassBox>
-
-        <S.IconGrassBox>
-          <GiParkBench
-            onClick={() => router.push('/gramas/recomendacoes/pracas')}
-            size={84}
-            color="rgba(9, 105, 6, 0.5)"
-          />
-          <S.IconGrassText
-            onClick={() => router.push('/gramas/recomendacoes/pracas')}
-          >
-            Praças
-          </S.IconGrassText>
-        </S.IconGrassBox>
-
-        <S.IconGrassBox>
-          <Flower2
-            onClick={() => router.push('/gramas/recomendacoes/jardins')}
-            size={84}
-            color="#096906"
-            opacity={0.5}
-          />
-          <S.IconGrassText
-            onClick={() => router.push('/gramas/recomendacoes/jardins')}
-          >
-            Jardins
-          </S.IconGrassText>
-        </S.IconGrassBox>
+            <S.IconGrassText>{rotulo}</S.IconGrassText>
+          </S.IconGrassBox>
+        ))}
       </S.WhereGrassCards>
     </S.WhereGrassContainer>
   )

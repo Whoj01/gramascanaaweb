@@ -1,323 +1,149 @@
 import Link from 'next/link'
-import styled, { keyframes } from 'styled-components'
-
-const fadeOut = keyframes`
-0% {
-  opacity: .6;
-  visibility: visible;
-  display: initial;
- }
-
- 100% {
-  opacity: 0;
-  visibility: hidden;
-  display: none;
- }
-`
-
-const fadeLinkOut = keyframes`
-  0% {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  visibility: visible;
-  display: initial;
- }
-
- 100% {
-  top: 50%;
-  left: 0;
-  transform: translate(0%, -50%);
-  visibility: hidden;
-  display: none;
- }
-`
-
-const fade = keyframes`
- 0% {
-  opacity: 0;
- }
-
- 100% {
-  opacity: .6;
- }
-`
-
-const fadeLink = keyframes`
-  0% {
-  top: 50%;
- }
-
- 100% {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
- }
-`
+import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const GrassSectionContainer = styled.section`
   width: 100%;
-  height: 100%;
+
+  padding: ${layout.espSecao} 1.6rem;
+
+  background-color: ${cor.brancoQuente};
 
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 
-  background-color: #f0f9ff;
+  gap: 4.8rem;
 
-  padding: 12rem 1rem;
-
-  gap: 2rem;
-
-  @media (min-width: 768px) {
-    padding: 12rem 9rem;
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
   }
 `
 
 export const GrassSectionTitleContainer = styled.div`
+  width: 100%;
+  max-width: ${layout.larguraMax};
+
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
-  gap: 1rem;
+  gap: 1.2rem;
 `
 
 export const GrassSectionTitle = styled.h2`
-  font-size: 3.2rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
+  font-weight: 600;
 
-  text-align: center;
+  letter-spacing: -0.02em;
 
-  color: #25d366;
+  max-width: 18ch;
+
+  color: ${cor.verdeCampo};
 `
 
-export const GrassSectionSubTittle = styled.h3`
-  font-size: 2rem;
+export const GrassSectionSubTittle = styled.p`
+  font-size: ${tipo.lead};
 
-  font-weight: 500;
-  font-family: 'Poppins', sans-serif;
+  max-width: 54ch;
 
-  text-align: center;
-
-  color: #7cb798;
+  color: ${cor.cinzaTexto};
 `
 
 export const CardsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
   width: 100%;
-  height: 100%;
+  max-width: ${layout.larguraMax};
 
-  gap: 6rem;
+  margin: 0 auto;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
 
-    width: 100%;
+  gap: 3.2rem;
+
+  ${bp.tablet} {
+    grid-template-columns: repeat(3, 1fr);
   }
 `
 
-export const GrassCard = styled.div`
-  max-width: 34rem;
-  max-height: 42rem;
-  width: 100%;
-  height: 100%;
-
+export const GrassCard = styled.article`
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 
-  background: #ffffff;
-
-  border-radius: 10px 10px 6px 6px;
+  border: 1px solid rgba(30, 77, 43, 0.14);
+  border-radius: 4px;
 
   overflow: hidden;
 
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-
-  @media (min-width: 768px) {
-    flex: 1 1 320px;
-
-    min-height: 41.2rem;
-    height: 100%;
-
-    justify-content: flex-start;
-  }
-`
-
-export const GrassCardViewMore = styled(Link)`
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-
-  width: 18rem;
-
-  border: 2px solid #ffff;
-
-  padding: 0.8rem 2rem;
-
-  background-color: transparent;
-  color: #fff;
-
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 1.6rem;
-
-  letter-spacing: 2px;
-  text-align: center;
-  text-decoration: none;
-
-  visibility: hidden;
-  opacity: 0;
-  display: none;
-
-  transition: all 0.3s ease-out;
-
-  z-index: 2;
-
-  animation: ${fadeLinkOut} 0.4s forwards;
-
-  &:hover {
-    background-color: #ffff;
-
-    color: #48cfb0;
-  }
+  background-color: ${cor.brancoQuente};
 `
 
 export const GrassCardImage = styled.div`
-  width: 100%;
-  height: 100%;
-
-  transition: all 0.4s ease;
-
   position: relative;
 
-  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 4 / 3;
 
-  &::before {
-    content: '';
-
-    background: #48cfb0;
-
-    opacity: 0;
-
-    position: absolute;
-
-    width: 100%;
-    height: 18.1rem;
-
-    top: 0;
-    bottom: 0;
-
-    transition: all 0.4s ease;
-
-    overflow: hidden;
-
-    visibility: hidden;
-    opacity: 0;
-    display: none;
-
-    animation: ${fadeOut} 0.4s forwards;
-  }
-
-  &:hover {
-    ${GrassCardViewMore} {
-      visibility: visible;
-      display: initial;
-      opacity: 1;
-
-      animation: ${fadeLink} 0.4s forwards;
-    }
-
-    &::before {
-      visibility: visible;
-      display: initial;
-      opacity: 0.4;
-
-      animation: ${fade} 0.4s forwards;
-    }
+  & > img {
+    object-fit: cover;
   }
 `
 
 export const GrassCardTextContainer = styled.div`
-  padding: 1.61rem;
-
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 
-  gap: 1.5rem;
+  gap: 1.2rem;
+
+  padding: 2.4rem;
+
+  border-top: 2px solid ${cor.terraSeca};
 `
 
-export const GrassCardTextTitle = styled.h4`
-  font-size: 2rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
+export const GrassCardTextTitle = styled.h3`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h3};
+  font-weight: 600;
 
-  line-height: 3rem;
-
-  text-align: center;
-
-  cursor: pointer;
-
-  transition: filter 0.3s ease;
-
-  &:hover {
-    filter: brightness(0.6);
-  }
+  text-transform: capitalize;
 `
 
 export const GrassCardTextLink = styled(Link)`
-  color: #25d366;
+  color: ${cor.verdeCampo};
+
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: ${cor.verdeVivo};
+  }
 `
 
 export const GrassCardText = styled.p`
-  font-size: 1.6rem;
-  font-weight: 400;
-  font-family: 'Nunito Sans', sans-serif;
+  font-size: ${tipo.body};
 
-  text-align: center;
+  color: ${cor.cinzaTexto};
 
-  color: #7cb798;
+  flex: 1;
 `
 
-export const GrassCardSeeMoreButton = styled.button`
-  font-size: 1.6rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
+export const GrassCardSeeMoreButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
 
-  padding: 1rem 3rem;
+  gap: 0.6rem;
 
-  color: #ffffff;
+  margin-top: 0.8rem;
 
-  background-color: #25d366;
+  font-family: ${fonte.texto};
+  font-size: ${tipo.body};
+  font-weight: 600;
 
-  border: none;
-  outline: none;
+  color: ${cor.verdeCampo};
 
-  border: 1px solid #25d366;
-
-  text-align: center;
-
-  border-radius: 8px;
-
-  cursor: pointer;
-
-  transition: filter 0.3s ease;
+  transition: color 0.3s ease;
 
   &:hover {
-    filter: brightness(1.3);
+    color: ${cor.verdeVivo};
   }
 `

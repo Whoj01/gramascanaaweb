@@ -1,4 +1,28 @@
-export const grassInfo = [
+export interface Grama {
+  id: number
+  name: string
+  pictures: string[]
+  banner: string
+  description: string
+  features: string[]
+  href: string
+  care: string[]
+  indicate: string[]
+}
+
+/** Slug de URL sem acento, ex.: "são carlos" -> "sao-carlos". */
+export const slugDaGrama = (name: string) =>
+  name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .split(' ')
+    .join('-')
+
+export const acharGramaPorSlug = (slug: string) =>
+  grassInfo.find((grama) => slugDaGrama(grama.name) === decodeURI(slug))
+
+export const grassInfo: Grama[] = [
   {
     id: 1,
     name: 'esmeralda',
@@ -48,7 +72,7 @@ export const grassInfo = [
       'Folhas mais largas',
       'Média maciez',
     ],
-    href: '/gramas/são-carlos',
+    href: '/gramas/sao-carlos',
     care: [
       'Esta grama não é muito resistente à seca e portanto necessita de uma irrigação constante. Ela deve ser podada quando ultrapassa 4 cm de altura ou a cada 20 dias.',
     ],

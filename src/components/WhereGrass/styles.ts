@@ -1,77 +1,83 @@
+import Link from 'next/link'
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const WhereGrassContainer = styled.section`
   width: 100%;
-  height: 100%;
 
-  padding: 12rem 1rem;
+  padding: ${layout.espSecao} 1.6rem;
+
+  background-color: ${cor.areiaClara};
 
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
 
-  gap: 4rem;
+  gap: 4.8rem;
 
-  background-color: #f0f9ff;
-
-  @media (min-width: 768px) {
-    padding: 12rem 9rem;
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
   }
 `
 
 export const WhereGrassTitle = styled.h2`
-  font-size: 3.2rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
+  font-weight: 600;
 
+  letter-spacing: -0.02em;
   text-align: center;
 
-  color: #25d366;
+  max-width: 20ch;
+
+  color: ${cor.verdeCampo};
 `
 
 export const WhereGrassCards = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
   width: 100%;
+  max-width: ${layout.larguraMax};
 
-  gap: 9rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-  @media (min-width: 768px) {
-    flex-direction: row;
+  gap: 1.6rem;
+
+  ${bp.tablet} {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
   }
 `
 
-export const IconGrassBox = styled.div`
+export const IconGrassBox = styled(Link)`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 
-  gap: 1.5rem;
+  gap: 1.6rem;
 
-  @media (min-width: 768px) {
-    max-width: 30rem;
-  }
-`
+  padding: 3.2rem 1.6rem;
 
-export const IconGrassText = styled.p`
-  font-size: 2.4rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
+  background-color: ${cor.brancoQuente};
+  border: 1px solid rgba(30, 77, 43, 0.14);
+  border-radius: 4px;
 
-  text-align: center;
+  color: ${cor.verdeCampo};
 
-  cursor: pointer;
-
-  color: #096906;
-
-  transition: all 0.4s ease;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 
   &:hover {
-    color: #25d366;
+    border-color: ${cor.verdeCampo};
+    color: ${cor.verdeVivo};
   }
+`
+
+export const IconGrassText = styled.span`
+  font-family: ${fonte.texto};
+  font-size: ${tipo.body};
+  font-weight: 600;
+
+  color: ${cor.tintaEscura};
 `

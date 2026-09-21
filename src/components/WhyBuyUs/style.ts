@@ -1,72 +1,81 @@
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const WhyUsContainer = styled.section`
   width: 100%;
-  height: 100%;
 
-  padding: 12rem 1rem;
+  padding: ${layout.espSecao} 1.6rem;
+
+  background-color: ${cor.areiaClara};
 
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
 
-  gap: 4rem;
+  gap: 4.8rem;
 
-  background-color: #f0f9ff;
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
+  }
 `
 
 export const WhyUsTitle = styled.h2`
-  font-size: 3.2rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
+  font-weight: 600;
 
+  letter-spacing: -0.02em;
   text-align: center;
 
-  color: #25d366;
+  max-width: 22ch;
+
+  color: ${cor.verdeCampo};
 `
 
 export const IconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: ${layout.larguraMax};
 
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-  gap: 2rem;
-`
+  gap: 3.2rem 2rem;
 
-export const IconContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 100%;
-
-  width: 10rem;
-  height: 10rem;
-
-  border: 1px solid #25d366;
+  ${bp.tablet} {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `
 
 export const Icons = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 
-  width: 15rem;
-  height: 100%;
+  gap: 1.6rem;
 
-  gap: 1rem;
+  text-align: center;
+`
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 6.4rem;
+  height: 6.4rem;
+
+  border-radius: 4px;
+
+  background-color: ${cor.verdeCampo};
+  color: ${cor.brancoQuente};
 `
 
 export const IconText = styled.p`
-  font-size: 1.6rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: ${fonte.texto};
+  font-size: ${tipo.body};
+  font-weight: 600;
 
-  color: #096906;
+  max-width: 16ch;
 
-  text-align: center;
+  color: ${cor.tintaEscura};
 `

@@ -1,142 +1,90 @@
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const AboutUsContainer = styled.section`
   width: 100%;
-  height: 100%;
 
-  padding: 12rem 1rem;
+  padding: ${layout.espSecao} 1.6rem;
 
-  display: flex;
-  flex-direction: column;
+  background-color: ${cor.brancoQuente};
+
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
+  }
+`
+
+export const Inner = styled.div`
+  width: 100%;
+  max-width: ${layout.larguraMax};
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr;
 
   gap: 4rem;
 
-  background-color: #141414;
-
-  @media (min-width: 768px) {
-    padding: 12rem 9rem;
+  ${bp.desktop} {
+    /* texto mais largo que a foto: a leitura é o que manda aqui */
+    grid-template-columns: 7fr 5fr;
+    gap: 6rem;
+    align-items: start;
   }
+`
+
+export const Texto = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
 `
 
 export const AboutUsTitle = styled.h2`
-  font-size: 2.8rem;
-  font-weight: 400;
-  font-family: 'Poppins', sans-serif;
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
+  font-weight: 600;
 
-  text-align: center;
+  letter-spacing: -0.02em;
 
-  color: #ffffff;
-`
+  max-width: 16ch;
 
-export const AboutUsSectionLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  gap: 2rem;
-`
-
-export const AboutUsSectionRigth = styled.div`
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-
-  gap: 2rem;
-`
-
-export const AboutUsSectionTitle = styled.h3`
-  position: relative;
-
-  font-size: 2rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
-
-  color: #ffffff;
-
-  padding-left: 30px;
-
-  &::before {
-    content: '';
-
-    position: absolute;
-
-    width: 20px;
-    height: 2px;
-
-    background: #ffffff;
-
-    left: 6px;
-    top: 50%;
-  }
-`
-
-export const AboutUsSectionTitleRigth = styled.h3`
-  position: relative;
-
-  font-size: 2rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
-
-  color: #ffffff;
-
-  padding-right: 30px;
-
-  &::after {
-    content: '';
-
-    position: absolute;
-
-    width: 20px;
-    height: 2px;
-
-    background: #ffffff;
-
-    right: 6px;
-    top: 50%;
-  }
+  color: ${cor.verdeCampo};
 `
 
 export const AboutUsSectionText = styled.p`
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-family: 'Nunito Sans', sans-serif;
+  font-size: ${tipo.body};
 
-  line-height: 3rem;
+  max-width: 62ch;
 
-  max-width: 29rem;
-
-  color: #ffffff;
-
-  @media (min-width: 768px) {
-    max-width: 50rem;
-  }
+  color: ${cor.cinzaTexto};
 `
 
-export const AboutUsSectionTextRigth = styled.p`
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-family: 'Nunito Sans', sans-serif;
+export const Figura = styled.figure`
+  display: flex;
+  flex-direction: column;
 
-  line-height: 3rem;
-
-  max-width: 29rem;
-
-  text-align: end;
-
-  color: #ffffff;
-
-  @media (min-width: 768px) {
-    max-width: 50rem;
-  }
+  gap: 1.2rem;
 `
 
 export const ImageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 
-  @media (min-width: 768px) {
-    width: 60rem;
-    align-self: center;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  & > img {
+    object-fit: cover;
   }
+`
+
+export const Legenda = styled.figcaption`
+  font-size: ${tipo.small};
+
+  padding-left: 1.2rem;
+  border-left: 2px solid ${cor.terraSeca};
+
+  color: ${cor.cinzaTexto};
 `

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Logo">
+  <circle cx="80" cy="80" r="74" fill="#14331D"/>
+  <circle cx="80" cy="80" r="74" fill="none" stroke="#4E9B47" stroke-width="5"/>
+
+  <!-- linha do solo -->
+  <path d="M38 110 H122" stroke="#B0733C" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- tufos de grama: traços grossos para continuar legível em 52px -->
+  <g fill="none" stroke="#4E9B47" stroke-width="12" stroke-linecap="round">
+    <path d="M54 110 C52 88 58 74 68 62"/>
+    <path d="M80 110 C79 84 80 68 80 52"/>
+    <path d="M106 110 C108 88 102 74 92 62"/>
+  </g>
+</svg>

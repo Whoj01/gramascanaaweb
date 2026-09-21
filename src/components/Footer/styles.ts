@@ -1,153 +1,196 @@
 import Link from 'next/link'
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const Footer = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  width: 100%;
 
-  padding: 8rem 2rem;
-
-  gap: 4rem;
-
-  background: #00331d;
+  background-color: ${cor.verdeFundo};
+  color: ${cor.brancoQuente};
 `
 
-export const FooterTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+export const FooterInner = styled.div`
+  width: 100%;
+  max-width: ${layout.larguraMax};
 
-  gap: 2rem;
+  margin: 0 auto;
+  padding: 6rem 1.6rem 3rem;
+
+  ${bp.tablet} {
+    padding: 8rem 4rem 3rem;
+  }
 `
 
-export const FooterTitle = styled.h2`
-  font-size: 3.2rem;
-  font-family: 'Poppins', sans-serif;
+export const CallToAction = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 2.4rem;
+
+  padding-bottom: 5rem;
+
+  ${bp.tablet} {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+`
+
+export const CallToActionTitle = styled.h2`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
   font-weight: 700;
 
-  text-align: center;
-
-  color: #ffffff;
+  max-width: 18ch;
 `
 
-export const FooterInfosContainer = styled.div`
+export const CallToActionText = styled.p`
+  font-size: ${tipo.body};
+
+  margin-top: 1.2rem;
+  opacity: 0.8;
+`
+
+export const CallToActionButtons = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
+  flex-wrap: wrap;
 
-  gap: 4rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
+  gap: 1.2rem;
 `
 
 export const FooterButton = styled.button`
-  font-size: 1.6rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 100%;
+  gap: 1rem;
 
-  padding: 1.5rem 0;
+  height: 4.8rem;
+  padding: 0 2.4rem;
 
-  background: #ffffff;
+  border: 1px solid ${cor.verdeVivo};
+  border-radius: 4px;
 
-  color: #25d366;
+  background-color: ${cor.verdeVivo};
+  color: ${cor.brancoQuente};
 
-  border: none;
-  outline: none;
-
-  border-radius: 30px;
-
-  transition: all 0.3s ease;
+  font-family: ${fonte.texto};
+  font-size: ${tipo.body};
+  font-weight: 600;
 
   cursor: pointer;
 
-  &:hover {
-    filter: brightness(0.8);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
-    transform: translateY(-5px);
+  &:hover {
+    background-color: ${cor.brancoQuente};
+    color: ${cor.verdeFundo};
   }
 `
-export const FooterInfoContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
 
-  flex-direction: column;
+export const FooterPhoneLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  gap: 2rem;
+  height: 4.8rem;
+  padding: 0 2.4rem;
 
-  width: 100%;
+  border: 1px solid rgba(251, 250, 247, 0.4);
+  border-radius: 4px;
+
+  color: ${cor.brancoQuente};
+
+  font-size: ${tipo.body};
+  font-weight: 500;
+
+  transition: border-color 0.3s ease;
+
+  &:hover {
+    border-color: ${cor.brancoQuente};
+  }
 `
 
-export const FooterInfoTitle = styled.h2`
-  font-size: 2.4rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
+export const FooterInfosContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
 
-  color: #ffffff;
+  gap: 4rem;
+
+  padding: 4rem 0;
+
+  border-top: 1px solid rgba(78, 155, 71, 0.35);
+
+  ${bp.tablet} {
+    /* colunas assimétricas: a densidade de cada bloco é diferente */
+    grid-template-columns: 4fr 3fr 5fr;
+    gap: 3rem;
+  }
+`
+
+export const FooterInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.6rem;
+`
+
+export const FooterInfoTitle = styled.h3`
+  font-family: ${fonte.display};
+  font-size: 2rem;
+  font-weight: 600;
 `
 
 export const FooterInfoText = styled.p`
-  font-size: 1.6rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
+  font-size: ${tipo.small};
 
-  color: #ffffff;
+  max-width: 40ch;
+  opacity: 0.8;
 `
 
-export const FooterInfoLinks = styled.menu`
+export const FooterInfoLinks = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   flex-direction: column;
 
   gap: 1rem;
 `
 
 export const FooterLink = styled(Link)`
-  font-size: 2rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 500;
+  font-size: ${tipo.small};
 
-  color: #ffffff;
+  color: ${cor.brancoQuente};
+  opacity: 0.8;
 
-  transition: filter 0.4s ease;
-
-  position: relative;
-
-  padding-left: 8px;
-
-  &::before {
-    content: '';
-
-    position: absolute;
-
-    left: 0;
-    top: 10px;
-
-    width: 4px;
-    height: 2px;
-
-    background: #ffffff;
-  }
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
 
   &:hover {
-    filter: brightness(0.8);
+    color: ${cor.verdeVivo};
+    opacity: 1;
   }
 `
 
-export const TextCopy = styled.p`
-  font-size: 1.4rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
+export const FooterBase = styled.div`
+  display: flex;
+  flex-direction: column;
 
-  text-align: center;
+  gap: 0.8rem;
 
-  color: #ffffff;
+  padding-top: 2.4rem;
+
+  border-top: 1px solid rgba(78, 155, 71, 0.35);
+
+  ${bp.tablet} {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+`
+
+export const TextCopy = styled.small`
+  font-size: 1.3rem;
+  opacity: 0.65;
 `

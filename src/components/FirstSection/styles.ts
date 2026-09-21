@@ -1,87 +1,96 @@
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const FirstSection = styled.section`
   position: relative;
 
-  padding-top: 110px;
-
-  min-height: 80vh;
-
   width: 100%;
-  height: 100%;
+  min-height: 56vh;
 
-  background-image: url('/sectionTransciton.webp');
+  display: flex;
+  align-items: flex-end;
 
-  z-index: 4;
-
-  background-size: cover;
-  background-position: center;
+  padding-top: ${layout.headerAltura};
 
   overflow: hidden;
 
-  @media (min-width: 768px) {
-    min-height: 50vh;
+  ${bp.tablet} {
+    min-height: 46vh;
   }
 `
 
+/** Camada da foto: o <Image fill> entra aqui, atrás do overlay. */
 export const BackgroundImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-
-  height: 100%;
-
-  padding: 8rem 2.4rem 0 2.4rem;
-
   position: absolute;
-
   inset: 0;
 
-  z-index: -1;
+  z-index: 0;
 
-  width: 100%;
-  height: 100%;
+  & > img {
+    object-fit: cover;
+    object-position: center;
+  }
 
-  gap: 1.4rem;
+  &::after {
+    content: '';
 
-  background-color: rgba(0, 18, 11, 0.7);
+    position: absolute;
+    inset: 0;
 
-  overflow: hidden;
-
-  @media (min-width: 768px) {
-    padding: 12rem 8rem;
+    background: linear-gradient(
+      90deg,
+      rgba(20, 51, 29, 0.88),
+      rgba(20, 51, 29, 0.45)
+    );
   }
 `
 
-export const FirstSectionTitle = styled.h2`
-  font-size: 4.8rem;
+export const Content = styled.div`
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: ${layout.larguraMax};
+
+  margin: 0 auto;
+  padding: 6rem 1.6rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 1.6rem;
+
+  ${bp.tablet} {
+    padding: 8rem 4rem;
+  }
+`
+
+export const FirstSectionTitle = styled.h1`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h1};
   font-weight: 700;
-  font-family: 'Poppins', sans-serif;
 
-  text-align: left;
+  letter-spacing: -0.02em;
 
-  color: #fff;
+  max-width: 16ch;
+
+  color: ${cor.brancoQuente};
 `
 
 export const Divisor = styled.div`
-  width: 32px;
-  height: 4px;
+  width: 48px;
+  height: 3px;
 
-  background-color: #25d366;
+  background-color: ${cor.terraSeca};
 `
 
 export const FirstSectionText = styled.p`
-  font-size: 1.6rem;
-  font-weight: 500;
+  font-size: ${tipo.lead};
+  font-weight: 400;
 
-  color: #fff;
+  max-width: 52ch;
 
-  max-width: 23rem;
-
-  line-height: 2.4rem;
-
-  @media (min-width: 768px) {
-    max-width: 50rem;
-  }
+  color: ${cor.brancoQuente};
+  opacity: 0.9;
 `

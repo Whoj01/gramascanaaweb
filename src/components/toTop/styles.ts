@@ -44,7 +44,7 @@ export const CircleDiv = styled.div<{ $isScroll: boolean }>`
   bottom: 15px;
   left: 15px;
 
-  background: #25d366;
+  background: var(--verde-campo);
 
   cursor: pointer;
 

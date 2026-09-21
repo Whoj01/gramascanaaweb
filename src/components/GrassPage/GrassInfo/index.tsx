@@ -1,322 +1,225 @@
 'use client'
 
-import { grassInfo } from '@/helpers/data'
-import { Navigation, Pagination, Thumbs } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/effect-fade'
-import 'swiper/bundle'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-
-import * as S from './styles'
-
+import { useMemo, useState } from 'react'
+import Image from 'next/image'
 import {
   CheckCircle,
-  ChevronLeft,
-  ChevronRight,
   Flower2,
   RollerCoaster,
   Tractor,
+  type LucideIcon,
 } from 'lucide-react'
 import { GiParkBench, GiSoccerKick } from 'react-icons/gi'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import type { IconType } from 'react-icons'
+
+import { grassInfo, type Grama } from '@/helpers/data'
+import { TELEFONE_WHATSAPP } from '@/helpers/contato'
+import { shimmer, toBase64 } from '@/helpers/ImageOp'
+import * as S from './styles'
 
 interface GrassInfoProps {
-  grass: {
-    id: number
-    name: string
-    pictures: string[]
-    banner: string
-    description: string
-    features: string[]
-    href: string
-    care: string[]
-    indicate: string[]
-  }
+  grass: Grama
 }
 
-interface Grass {
-  id: number
-  name: string
-  pictures: string[]
-  banner: string
-  description: string
-  features: string[]
-  href: string
-  care: string[]
-  indicate: string[]
+const indicacoes: Record<
+  string,
+  { rotulo: string; Icone: LucideIcon | IconType }
+> = {
+  pracas: { rotulo: 'Praças', Icone: GiParkBench },
+  campos: { rotulo: 'Campos', Icone: GiSoccerKick },
+  playgrounds: { rotulo: 'Playgrounds', Icone: RollerCoaster },
+  sitios: { rotulo: 'Sítios', Icone: Tractor },
+  jardins: { rotulo: 'Jardins', Icone: Flower2 },
 }
 
 export const GrassInfo = ({ grass }: GrassInfoProps) => {
-  const router = useRouter()
+  const [fotoAtiva, setFotoAtiva] = useState(0)
 
-  const [OtherGrass, setOtherGrass] = useState<Grass[]>([])
-
-  const sendMessage = () => {
-    const message = 'Olá, gostaria de fazer o orçamento da grama ' + grass.name
+  const pedirOrcamento = () => {
+    const message = `Olá, gostaria de fazer o orçamento da grama ${grass.name}`
 
     window.open(
-      `https://api.whatsapp.com/send?phone=5515996218062&text=${message}`,
+      `https://api.whatsapp.com/send?phone=${TELEFONE_WHATSAPP}&text=${message}`,
       '_blank',
     )
   }
 
-  useEffect(() => {
-    setOtherGrass(
-      grassInfo
-        .filter((grassToCompare) =>
-          grassToCompare.indicate.some((indicateToCompare) =>
-            grass.indicate.some(
-              (grassToFind) => grassToFind === indicateToCompare,
-            ),
-          ),
-        )
-        .filter((grassToCompare) => grassToCompare.id !== grass.id),
-    )
-  }, [grass.id, grass.indicate])
+  // valor derivado do próprio dado: não precisa de estado nem de efeito
+  const outrasGramas = useMemo(
+    () =>
+      grassInfo.filter(
+        (outra) =>
+          outra.id !== grass.id &&
+          outra.indicate.some((uso) => grass.indicate.includes(uso)),
+      ),
+    [grass.id, grass.indicate],
+  )
+
   return (
     <>
-      <S.FirstSection
-        style={{
-          backgroundImage: `url(${grass.banner})`,
-          backgroundPosition: 'center',
-        }}
-      >
+      <S.FirstSection>
         <S.BackgroundImage>
-          <S.FirstSectionTitle>{grass.name}</S.FirstSectionTitle>
+          <Image
+            src={grass.banner}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            aria-hidden
+          />
+        </S.BackgroundImage>
+
+        <S.HeroConteudo>
+          <S.FirstSectionTitle>Grama {grass.name}</S.FirstSectionTitle>
 
           <S.Divisor />
 
           <S.FirstSectionText>
-            Aplicações e características da grama{' '}
-            <S.TextSpan> {grass.name} </S.TextSpan>
+            Características, cuidados e aplicações da grama {grass.name}.
           </S.FirstSectionText>
-        </S.BackgroundImage>
+        </S.HeroConteudo>
       </S.FirstSection>
 
       <S.GrassSectionContainer>
-        <S.SlideContainer>
-          <Swiper
-            breakpoints={{
-              768: {
-                width: 576,
-                slidesPerView: 1,
-              },
-              900: {
-                width: 2000,
-                slidesPerView: 3,
-              },
-            }}
-            style={{ height: '100%', width: '100%', marginBottom: '50px' }}
-            spaceBetween={20}
-            watchSlidesProgress
-            loop
-            modules={[Navigation, Pagination, Thumbs]}
-            slidesPerView={1}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-              enabled: true,
-            }}
-            pagination={{ clickable: true }}
-          >
-            {grass.pictures.map((picture) => (
-              <SwiperSlide
-                key={picture}
-                style={{
-                  background: `url(${picture}) no-repeat`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  width: '100%',
-                  borderRadius: '12px',
-                }}
-              ></SwiperSlide>
-            ))}
-
-            <ChevronLeft
-              color="#fff"
-              size={124}
-              style={{
-                height: '40px',
-                width: '40px',
-              }}
-              className="swiper-button-prev"
-            />
-
-            <ChevronRight
-              color="#fff"
-              style={{
-                height: '40px',
-                width: '40px',
-              }}
-              className="swiper-button-next"
-            />
-          </Swiper>
-        </S.SlideContainer>
-
-        <S.InfoContainer>
-          <S.InfoContainerTitle>
-            Grama {grass.name} com você em todos os momentos!
-          </S.InfoContainerTitle>
-
-          <S.InfoContainerDivisor />
-
-          <S.InfoContainerText>{grass.description}</S.InfoContainerText>
-
-          <S.InfoContainerTitle>
-            Cuidados com a grama {grass.name}
-          </S.InfoContainerTitle>
-
-          <S.InfoContainerDivisor />
-
-          {grass.care.map((care, i) => (
-            <S.InfoContainerText key={i}>{care}</S.InfoContainerText>
-          ))}
-
-          <S.InfoContainerTitle>
-            Principais características da grama {grass.name}
-          </S.InfoContainerTitle>
-
-          <S.InfoContainerDivisor />
-
-          {grass.features.map((feature) => (
-            <S.GrassCardInfoFeature key={feature}>
-              <CheckCircle color="#25d366" size={24} />
-
-              <S.GrassCardInfoFeatureText>{feature}</S.GrassCardInfoFeatureText>
-            </S.GrassCardInfoFeature>
-          ))}
-
-          <S.InfoContainerTitle>
-            A grama {grass.name} é principalmente indicada para
-          </S.InfoContainerTitle>
-
-          <S.InfoContainerDivisor />
-
-          <S.WhereGrassCards>
-            {grass.indicate.map((indicate) => (
-              <S.IconGrassBox key={indicate}>
-                {indicate === 'pracas' && (
-                  <>
-                    <GiParkBench size={84} color="rgba(9, 105, 6, 0.5)" />
-                    <S.IconGrassText>Praças</S.IconGrassText>
-                  </>
-                )}
-                {indicate === 'campos' && (
-                  <>
-                    <GiSoccerKick size={84} color="rgba(9, 105, 6, 0.5)" />
-                    <S.IconGrassText>Campos</S.IconGrassText>
-                  </>
-                )}
-
-                {indicate === 'playgrounds' && (
-                  <>
-                    <RollerCoaster size={84} color="#096906" opacity={0.5} />
-                    <S.IconGrassText>Playgrounds</S.IconGrassText>
-                  </>
-                )}
-
-                {indicate === 'sitios' && (
-                  <>
-                    <Tractor size={84} color="#096906" opacity={0.5} />
-                    <S.IconGrassText>Sítios</S.IconGrassText>
-                  </>
-                )}
-
-                {indicate === 'jardins' && (
-                  <>
-                    <Flower2 size={84} color="#096906" opacity={0.5} />
-
-                    <S.IconGrassText>Jardins</S.IconGrassText>
-                  </>
-                )}
-              </S.IconGrassBox>
-            ))}
-          </S.WhereGrassCards>
-
-          <S.GrassCardButton onClick={sendMessage}>
-            Fazer orçamento
-          </S.GrassCardButton>
-
-          <S.InfoContainerTitle>Outras recomendações</S.InfoContainerTitle>
-
-          <S.InfoContainerDivisor />
-
-          <S.SlideContainer>
-            <Swiper
-              breakpoints={{
-                768: {
-                  width: 576,
-                  slidesPerView: 1,
-                },
-                900: {
-                  width: 1350,
-                  slidesPerView: 2,
-                },
-              }}
-              style={{ height: '100%', width: '100%' }}
-              spaceBetween={20}
-              loop
-              modules={[Navigation, Pagination]}
-              slidesPerView={1}
-              navigation={{
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-                enabled: true,
-              }}
-              pagination={{ clickable: true }}
-            >
-              {OtherGrass.map((grass) => (
-                <SwiperSlide
-                  key={grass.id}
-                  style={{
-                    background: `url(${grass.pictures[0]}) no-repeat`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-
-                    width: '100%',
-                    borderRadius: '12px',
-                    height: '100%',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <S.SlideItemContainer>
-                    <S.SlideItemTitle onClick={() => router.push(grass.href)}>
-                      {grass.name}
-                    </S.SlideItemTitle>
-
-                    <S.GrassCardButton onClick={() => router.push(grass.href)}>
-                      Ver mais!
-                    </S.GrassCardButton>
-                  </S.SlideItemContainer>
-                </SwiperSlide>
-              ))}
-
-              <ChevronLeft
-                color="#fff"
-                size={124}
-                style={{
-                  height: '40px',
-                  width: '40px',
-                }}
-                className="swiper-button-prev"
+        <S.Inner>
+          <S.Galeria>
+            <S.GaleriaPrincipal>
+              <Image
+                src={grass.pictures[fotoAtiva]}
+                alt={`Grama ${grass.name}, foto ${fotoAtiva + 1}`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 80vw, 100vw"
+                placeholder={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(700, 475),
+                )}`}
               />
+            </S.GaleriaPrincipal>
 
-              <ChevronRight
-                color="#fff"
-                style={{
-                  height: '40px',
-                  width: '40px',
-                }}
-                className="swiper-button-next"
-              />
-            </Swiper>
-          </S.SlideContainer>
-        </S.InfoContainer>
+            {grass.pictures.length > 1 && (
+              <S.GaleriaMiniaturas>
+                {grass.pictures.map((picture, i) => (
+                  <S.Miniatura
+                    key={picture}
+                    $ativa={i === fotoAtiva}
+                    onClick={() => setFotoAtiva(i)}
+                    aria-label={`Ver foto ${i + 1} da grama ${grass.name}`}
+                    aria-current={i === fotoAtiva}
+                  >
+                    <Image
+                      src={picture}
+                      alt=""
+                      fill
+                      sizes="160px"
+                      aria-hidden
+                    />
+                  </S.Miniatura>
+                ))}
+              </S.GaleriaMiniaturas>
+            )}
+          </S.Galeria>
+
+          <S.InfoContainer>
+            <S.Coluna>
+              <S.Bloco>
+                <S.InfoContainerTitle>
+                  Sobre a grama {grass.name}
+                </S.InfoContainerTitle>
+
+                <S.InfoContainerDivisor />
+
+                <S.InfoContainerText>{grass.description}</S.InfoContainerText>
+              </S.Bloco>
+
+              <S.Bloco>
+                <S.InfoContainerTitle>
+                  Como cuidar desta grama
+                </S.InfoContainerTitle>
+
+                <S.InfoContainerDivisor />
+
+                {grass.care.map((care) => (
+                  <S.InfoContainerText key={care.slice(0, 40)}>
+                    {care}
+                  </S.InfoContainerText>
+                ))}
+              </S.Bloco>
+            </S.Coluna>
+
+            <S.Painel>
+              <div>
+                <S.PainelTitulo>Características</S.PainelTitulo>
+
+                <S.ListaFeatures style={{ marginTop: '1.6rem' }}>
+                  {grass.features.map((feature) => (
+                    <S.GrassCardInfoFeature key={feature}>
+                      <CheckCircle size={20} />
+
+                      <S.GrassCardInfoFeatureText>
+                        {feature}
+                      </S.GrassCardInfoFeatureText>
+                    </S.GrassCardInfoFeature>
+                  ))}
+                </S.ListaFeatures>
+              </div>
+
+              <div>
+                <S.PainelTitulo>Indicada para</S.PainelTitulo>
+
+                <S.WhereGrassCards style={{ marginTop: '1.6rem' }}>
+                  {grass.indicate.map((uso) => {
+                    const indicacao = indicacoes[uso]
+                    if (!indicacao) return null
+
+                    const { rotulo, Icone } = indicacao
+
+                    return (
+                      <S.IconGrassBox key={uso}>
+                        <Icone size={32} />
+
+                        <S.IconGrassText>{rotulo}</S.IconGrassText>
+                      </S.IconGrassBox>
+                    )
+                  })}
+                </S.WhereGrassCards>
+              </div>
+
+              <S.GrassCardButton onClick={pedirOrcamento}>
+                Pedir orçamento
+              </S.GrassCardButton>
+            </S.Painel>
+          </S.InfoContainer>
+        </S.Inner>
       </S.GrassSectionContainer>
+
+      {outrasGramas.length > 0 && (
+        <S.OutrasSecao>
+          <S.Inner>
+            <S.OutrasTitulo>Outras gramas para o mesmo uso</S.OutrasTitulo>
+
+            <S.OutrasGrade>
+              {outrasGramas.map((outra) => (
+                <S.OutraCard key={outra.id} href={outra.href}>
+                  <S.OutraFoto>
+                    <Image
+                      src={outra.pictures[0]}
+                      alt={`Grama ${outra.name}`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                    />
+                  </S.OutraFoto>
+
+                  <S.OutraNome>{outra.name}</S.OutraNome>
+
+                  <S.OutraTexto>
+                    {outra.features.slice(0, 2).join('. ')}.
+                  </S.OutraTexto>
+                </S.OutraCard>
+              ))}
+            </S.OutrasGrade>
+          </S.Inner>
+        </S.OutrasSecao>
+      )}
     </>
   )
 }

@@ -8,6 +8,11 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { sendMessage } from '@/helpers/sendMessage'
+import {
+  NOME_EMPRESA,
+  TELEFONE_EXIBICAO,
+  TELEFONE_WHATSAPP,
+} from '@/helpers/contato'
 
 export const Header = () => {
   const router = useRouter()
@@ -34,25 +39,25 @@ export const Header = () => {
   }, [])
 
   return (
-    <>
-      <S.Indicator />
-
-      <S.Header $isScroll={isScroll}>
-        <Image
-          src="/canaalogo.png"
-          alt="Logo gramas canaã"
-          height={124}
-          width={124}
+    <S.Header $isScroll={isScroll}>
+      <S.HeaderInner>
+        <S.LogoButton
           onClick={() => router.push('/')}
-          style={{
-            cursor: 'pointer',
-          }}
-        />
+          aria-label="Ir para a página inicial"
+        >
+          <Image
+            src="/logo.svg"
+            alt={NOME_EMPRESA}
+            height={52}
+            width={52}
+            priority
+          />
+        </S.LogoButton>
 
         <S.Nav $isOpen={isMenuOpen}>
           <S.NavMenu>
             <MenuLink href="/" onClick={setCloseMenu}>
-              Ínicio
+              Início
             </MenuLink>
 
             <MenuLink href="/sobre-nos" onClick={setCloseMenu}>
@@ -71,25 +76,36 @@ export const Header = () => {
               Obras
             </MenuLink>
 
-            <S.CloseMenuIcon onClick={() => setIsMenuOpen(false)}>
-              <XCircle color="#fff" size={24} />
+            <S.CloseMenuIcon
+              onClick={() => setIsMenuOpen(false)}
+              aria-label="Fechar menu"
+            >
+              <XCircle color="#FBFAF7" size={28} />
             </S.CloseMenuIcon>
           </S.NavMenu>
         </S.Nav>
 
-        <S.WppButtons onClick={sendMessage}>
-          <Phone size={24} color="#fff" />
-          (15) 99798-5721
-        </S.WppButtons>
+        <S.HeaderActions>
+          <S.PhoneLink
+            href={`tel:+${TELEFONE_WHATSAPP}`}
+            aria-label={`Ligar para ${TELEFONE_EXIBICAO}`}
+          >
+            <Phone size={20} />
+          </S.PhoneLink>
 
-        <S.MenuIcon>
-          <Menu
-            size={24}
-            color={isScroll ? ' #00856fef' : '#25d366'}
+          <S.WppButtons onClick={sendMessage}>
+            <Phone size={18} />
+            Pedir orçamento
+          </S.WppButtons>
+
+          <S.MenuIcon
             onClick={() => setIsMenuOpen(true)}
-          />
-        </S.MenuIcon>
-      </S.Header>
-    </>
+            aria-label="Abrir menu"
+          >
+            <Menu size={26} />
+          </S.MenuIcon>
+        </S.HeaderActions>
+      </S.HeaderInner>
+    </S.Header>
   )
 }

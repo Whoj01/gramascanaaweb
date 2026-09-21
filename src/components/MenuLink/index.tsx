@@ -1,3 +1,5 @@
+'use client'
+
 import { LinkProps } from 'next/link'
 import * as S from './styles'
 import { usePathname } from 'next/navigation'

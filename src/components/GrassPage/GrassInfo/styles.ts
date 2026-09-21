@@ -1,275 +1,426 @@
 import styled from 'styled-components'
+import { bp, cor, fonte, layout, tipo } from '@/styles/tokens'
 
 export const FirstSection = styled.section`
   position: relative;
 
-  padding-top: 110px;
-
-  min-height: 80vh;
-
   width: 100%;
-  height: 100%;
+  min-height: 56vh;
 
-  z-index: 4;
+  display: flex;
+  align-items: flex-end;
 
-  background-size: cover;
-  background-position: center;
+  padding-top: ${layout.headerAltura};
 
   overflow: hidden;
 
-  @media (min-width: 768px) {
-    min-height: 50vh;
+  ${bp.tablet} {
+    min-height: 46vh;
   }
 `
 
 export const BackgroundImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  height: 100%;
-
-  padding: 8rem 2.4rem 0 2.4rem;
-
   position: absolute;
-
   inset: 0;
 
-  z-index: -1;
+  z-index: 0;
+
+  & > img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+      90deg,
+      rgba(20, 51, 29, 0.88),
+      rgba(20, 51, 29, 0.45)
+    );
+  }
+`
+
+export const HeroConteudo = styled.div`
+  position: relative;
+  z-index: 1;
 
   width: 100%;
-  height: 100%;
+  max-width: ${layout.larguraMax};
 
-  gap: 1.4rem;
+  margin: 0 auto;
+  padding: 6rem 1.6rem;
 
-  background-color: rgba(0, 18, 11, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-  overflow: hidden;
+  gap: 1.6rem;
+
+  ${bp.tablet} {
+    padding: 8rem 4rem;
+  }
 `
 
-export const TextSpan = styled.span`
-  font-size: 2.4rem;
-  font-weight: 500;
-
-  text-transform: capitalize;
-
-  color: #fff;
-
-  line-height: 2.4rem;
-`
-
-export const FirstSectionTitle = styled.h2`
-  font-size: 6.4rem;
+export const FirstSectionTitle = styled.h1`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h1};
   font-weight: 700;
-  font-family: 'Poppins', sans-serif;
 
-  text-align: center;
-
+  letter-spacing: -0.02em;
   text-transform: capitalize;
 
-  color: #fff;
+  color: ${cor.brancoQuente};
 `
 
 export const Divisor = styled.div`
-  width: 32px;
-  height: 4px;
+  width: 48px;
+  height: 3px;
 
-  background-color: #25d366;
+  background-color: ${cor.terraSeca};
 `
 
 export const FirstSectionText = styled.p`
-  font-size: 2.4rem;
-  font-weight: 500;
+  font-size: ${tipo.lead};
 
-  text-align: center;
+  max-width: 52ch;
 
-  color: #fff;
-
-  line-height: 2.4rem;
+  color: ${cor.brancoQuente};
+  opacity: 0.9;
 `
 
 export const GrassSectionContainer = styled.section`
   width: 100%;
-  height: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  padding: ${layout.espSecao} 1.6rem;
 
-  background-color: #f0f9ff;
+  background-color: ${cor.brancoQuente};
 
-  padding: 12rem 1rem;
-
-  gap: 4rem;
-
-  @media (min-width: 768px) {
-    padding: 12rem 9rem;
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
   }
 `
 
-export const SlideContainer = styled.section`
+export const Inner = styled.div`
   width: 100%;
-  height: 38.2rem;
+  max-width: ${layout.larguraMax};
 
-  align-self: center;
+  margin: 0 auto;
+`
+
+/** Galeria: a foto principal ocupa a largura, as miniaturas ficam abaixo. */
+export const Galeria = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1.2rem;
+
+  margin-bottom: 6rem;
+`
+
+export const GaleriaPrincipal = styled.div`
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  background-color: ${cor.areiaClara};
+
+  & > img {
+    object-fit: cover;
+  }
+
+  ${bp.tablet} {
+    /* teto de altura para a foto não dominar a tela em telas largas */
+    aspect-ratio: 16 / 9;
+    max-height: 52rem;
+  }
+`
+
+export const GaleriaMiniaturas = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.2rem;
+
+  ${bp.tablet} {
+    /* acompanha a largura da foto principal quando ela bate no max-height */
+    max-width: calc(52rem * 16 / 9);
+    grid-template-columns: repeat(6, 1fr);
+  }
+`
+
+export const Miniatura = styled.button<{ $ativa: boolean }>`
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  padding: 0;
+
+  border: 2px solid ${(props) => (props.$ativa ? cor.terraSeca : 'transparent')};
+  border-radius: 4px;
+
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
+
+  opacity: ${(props) => (props.$ativa ? 1 : 0.65)};
+
+  transition:
+    opacity 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  & > img {
+    object-fit: cover;
+  }
 `
 
 export const InfoContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 4.8rem;
+
+  ${bp.desktop} {
+    grid-template-columns: 7fr 5fr;
+    gap: 6rem;
+    align-items: start;
+  }
+`
+
+export const Coluna = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
 
-  width: 100%;
-  height: 100%;
+  gap: 3.2rem;
+`
 
-  gap: 2rem;
+export const Bloco = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.2rem;
 `
 
 export const InfoContainerTitle = styled.h2`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: ${fonte.display};
+  font-size: ${tipo.h3};
+  font-weight: 600;
 
-  font-size: 2.4rem;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-
-  color: #25d366;
-
-  text-align: center;
-
-  gap: 2rem;
+  color: ${cor.verdeCampo};
 `
 
 export const InfoContainerDivisor = styled.div`
-  width: 100%;
-  height: 2px;
+  width: 48px;
+  height: 3px;
 
-  background-color: #7cb798;
+  background-color: ${cor.terraSeca};
 `
 
 export const InfoContainerText = styled.p`
-  font-size: 2rem;
-  font-weight: 400;
-  font-family: 'Nunito Sans', sans-serif;
+  font-size: ${tipo.body};
 
-  text-align: left;
-  color: #7cb798;
+  max-width: 62ch;
+
+  color: ${cor.cinzaTexto};
 `
 
-export const GrassCardInfoFeature = styled.div`
+/** Painel lateral: ficha técnica + indicações + CTA. */
+export const Painel = styled.aside`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
-  gap: 1rem;
+  gap: 2.4rem;
+
+  padding: 3.2rem 2.4rem;
+
+  border: 1px solid rgba(30, 77, 43, 0.14);
+  border-top: 3px solid ${cor.terraSeca};
+  border-radius: 4px;
+
+  background-color: ${cor.areiaClara};
+
+  ${bp.desktop} {
+    position: sticky;
+    top: calc(${layout.headerAltura} + 2rem);
+  }
 `
 
-export const GrassCardInfoFeatureText = styled.div`
-  color: #54595f;
+export const PainelTitulo = styled.h2`
+  font-family: ${fonte.display};
+  font-size: 2rem;
+  font-weight: 600;
 
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.4rem;
+  color: ${cor.verdeCampo};
+`
+
+export const GrassCardInfoFeature = styled.li`
+  display: flex;
+  align-items: flex-start;
+
+  gap: 0.8rem;
+
+  color: ${cor.verdeCampo};
+`
+
+export const GrassCardInfoFeatureText = styled.span`
+  font-size: ${tipo.body};
+
+  color: ${cor.tintaEscura};
+`
+
+export const ListaFeatures = styled.ul`
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
 `
 
 export const WhereGrassCards = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-  width: 100%;
-
-  gap: 5rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
+  gap: 1.2rem;
 `
 
 export const IconGrassBox = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 
-  gap: 1.5rem;
+  gap: 0.8rem;
 
-  @media (min-width: 768px) {
-    max-width: 30rem;
-  }
+  padding: 1.6rem 0.8rem;
+
+  border: 1px solid rgba(30, 77, 43, 0.16);
+  border-radius: 4px;
+
+  background-color: ${cor.brancoQuente};
+  color: ${cor.verdeCampo};
 `
 
-export const IconGrassText = styled.p`
-  font-size: 2.4rem;
-  font-weight: 500;
-  font-family: 'Nunito Sans', sans-serif;
+export const IconGrassText = styled.span`
+  font-size: ${tipo.small};
+  font-weight: 600;
 
-  text-align: center;
-
-  color: #096906;
-`
-
-export const SlideItemContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  height: 100%;
-  width: 100%;
-
-  flex-direction: column;
-
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
-
-  gap: 2rem;
-
-  padding: 4rem 0;
-`
-
-export const SlideItemTitle = styled.h2`
-  text-align: center;
-
-  font-size: 2.8rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
-
-  text-transform: capitalize;
-
-  color: #e6e7e5;
+  color: ${cor.tintaEscura};
 `
 
 export const GrassCardButton = styled.button`
-  font-size: 1.6rem;
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-  width: 50%;
+  width: 100%;
+  height: 5.2rem;
+  padding: 0 2rem;
 
-  padding: 1rem 0;
+  border: 1px solid ${cor.verdeCampo};
+  border-radius: 4px;
 
-  background: #25d366;
+  background-color: ${cor.verdeCampo};
+  color: ${cor.brancoQuente};
 
-  color: #ffffff;
-
-  border: none;
-  outline: none;
-
-  border-radius: 30px;
-
-  transition: all 0.3s ease;
+  font-family: ${fonte.texto};
+  font-size: ${tipo.body};
+  font-weight: 600;
 
   cursor: pointer;
 
-  align-self: center;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
   &:hover {
-    filter: brightness(0.8);
-
-    transform: translateY(-5px);
+    background-color: transparent;
+    color: ${cor.verdeCampo};
   }
+`
+
+export const OutrasSecao = styled.section`
+  width: 100%;
+
+  padding: ${layout.espSecao} 1.6rem;
+
+  background-color: ${cor.verdeFundo};
+
+  ${bp.tablet} {
+    padding: ${layout.espSecao} 4rem;
+  }
+`
+
+export const OutrasTitulo = styled.h2`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h2};
+  font-weight: 600;
+
+  letter-spacing: -0.02em;
+
+  margin-bottom: 3.2rem;
+
+  color: ${cor.brancoQuente};
+`
+
+export const OutrasGrade = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 2.4rem;
+
+  ${bp.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+export const OutraCard = styled.a`
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.2rem;
+`
+
+export const OutraFoto = styled.div`
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 3 / 2;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  & > img {
+    object-fit: cover;
+  }
+`
+
+export const OutraNome = styled.h3`
+  font-family: ${fonte.display};
+  font-size: ${tipo.h3};
+  font-weight: 600;
+
+  text-transform: capitalize;
+
+  color: ${cor.brancoQuente};
+`
+
+export const OutraTexto = styled.p`
+  font-size: ${tipo.small};
+
+  color: ${cor.brancoQuente};
+  opacity: 0.75;
 `
