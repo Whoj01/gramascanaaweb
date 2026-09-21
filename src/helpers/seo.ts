@@ -8,9 +8,9 @@ import { NOME_EMPRESA, TELEFONE_WHATSAPP } from './contato'
  * errado e o Google ignora boa parte do trabalho.
  */
 
-// TODO: domínio real do site. Usado em canonical, sitemap, robots e og:url.
+/** Domínio do site. Usado em canonical, sitemap, robots e og:url. */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://exemplo.com.br'
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://grama.josuedev.tech'
 
 /**
  * Libera a indexação pelos buscadores.

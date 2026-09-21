@@ -1,9 +1,8 @@
 # Deploy do site em servidor que JÁ roda um Traefik (projeto corretoras).
 #
-# Este arquivo NÃO sobe proxy próprio nem ocupa as portas 80/443: ele apenas
-# publica o site na porta 8080 e se registra na rede do Traefik existente.
-# Não usar o docker-compose.yml antigo aqui — ele sobe um nginx-proxy que
-# tomaria as portas 80/443 e derrubaria o site que já está no ar.
+# Este arquivo NÃO sobe proxy próprio: as portas 80/443 pertencem ao
+# corretoras-traefik e não podem ser ocupadas, sob risco de derrubar o site
+# que já está no ar. O roteamento é feito por labels, na rede do Traefik.
 
 services:
   grama-web:
@@ -12,19 +11,32 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://187.127.2.118:8080}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://grama.josuedev.tech}
         NEXT_PUBLIC_INDEXAVEL: ${NEXT_PUBLIC_INDEXAVEL:-false}
     environment:
       TZ: America/Sao_Paulo
       NODE_ENV: production
+    # acesso direto por IP, útil para conferir antes do DNS propagar
     ports:
       - "8080:3000"
     networks:
       - corretoras-proxy
     restart: unless-stopped
     labels:
-      # exposedbydefault=false no Traefik: sem esta linha ele ignora o container
-      traefik.enable: "false"
+      traefik.enable: "true"
+      traefik.docker.network: corretoras-proxy
+
+      # HTTP: o próprio Traefik redireciona para HTTPS (redirections global)
+      traefik.http.routers.grama.rule: Host(`grama.josuedev.tech`)
+      traefik.http.routers.grama.entrypoints: web
+
+      # HTTPS com certificado Let's Encrypt automático
+      traefik.http.routers.grama-secure.rule: Host(`grama.josuedev.tech`)
+      traefik.http.routers.grama-secure.entrypoints: websecure
+      traefik.http.routers.grama-secure.tls: "true"
+      traefik.http.routers.grama-secure.tls.certresolver: letsencrypt
+
+      traefik.http.services.grama.loadbalancer.server.port: "3000"
 
 networks:
   corretoras-proxy:
